@@ -1,0 +1,7 @@
+{
+  "name": "LowProtector",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
