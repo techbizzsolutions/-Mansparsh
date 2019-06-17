@@ -2,13 +2,14 @@ import { Component,ViewChild } from '@angular/core';
 import { Nav,AlertController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { LoginPage } from '../pages/login/login';
 
-import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = "AdvertisePage";
+  rootPage:any;
+  user:any;
   @ViewChild(Nav) nav: Nav;
   constructor(platform: Platform, statusBar: StatusBar,public alertCtrl: AlertController, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -17,7 +18,14 @@ export class MyApp {
       statusBar.styleDefault();
       statusBar.backgroundColorByHexString("#FF6347");
       splashScreen.hide();
-     
+      this.user = JSON.parse(localStorage.getItem('user'));
+      if(this.user)
+      {
+        this.rootPage = 'DashboardPage';
+      }
+      else{
+        this.rootPage = LoginPage;
+      }
       platform.registerBackButtonAction(() => {
         if (this.nav.canGoBack()) {
           this.nav.pop();

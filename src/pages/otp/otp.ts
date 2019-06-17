@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,AlertController, ToastController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { SmsServiceProvider } from '../../providers/sms-service/sms-service';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
+import { ApiProvider } from '../../providers/api/api';
+import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 
 @IonicPage()
 @Component({
@@ -13,7 +15,9 @@ export class OtpPage {
 
   otp:any;
   user:any;
-  constructor(public navCtrl: NavController,private openNativeSettings: OpenNativeSettings,public smsServiceProvider: SmsServiceProvider,public alertCtrl: AlertController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,
+    private loader: LoaderServiceProvider,
+    public api: ApiProvider, public toastCtrl: ToastController,private openNativeSettings: OpenNativeSettings,public smsServiceProvider: SmsServiceProvider,public alertCtrl: AlertController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
@@ -86,7 +90,33 @@ export class OtpPage {
       if(this.otp == sndotp)
       {
         localStorage.setItem('isVerified', 'true');
-        this.navCtrl.setRoot('DashboardPage');
+        this.loader.Show("Loading...");
+        this.api.add('regsiter',this.user).subscribe(res => {
+          this.loader.Hide();
+          console.log('this.res',res);
+          if(res.authorization)
+          {
+           
+          }
+          else{
+            let toast = this.toastCtrl.create({
+              message: res.message, 
+              position: 'top',
+              duration: 3000
+            });
+            toast.present();
+          }
+          
+        }, err => {
+          this.loader.Hide();
+          console.log('login err',err);
+          let toast = this.toastCtrl.create({
+            message: 'Something went wrong, please try again', 
+            position: 'top',
+            duration: 3000
+          });
+          toast.present();
+        });
       }
       else{
         this.showAlert("Please enter correct otp", 4); 

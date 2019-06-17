@@ -13,11 +13,16 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { SmsServiceProvider } from '../providers/sms-service/sms-service';
 import { OpenNativeSettings } from '@ionic-native/open-native-settings';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser';
+import { ApiProvider } from '../providers/api/api';
+import { LoaderServiceProvider } from '../providers/loader-service/loader-service';
+import { Network } from '@ionic-native/network';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   imports: [
     HttpModule,
@@ -28,7 +33,8 @@ import { ThemeableBrowser } from '@ionic-native/themeable-browser';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,
@@ -36,10 +42,13 @@ import { ThemeableBrowser } from '@ionic-native/themeable-browser';
     SocialSharing,
     DatePicker,
     SMS,
+    Network,
     OpenNativeSettings,
     ThemeableBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SmsServiceProvider
+    SmsServiceProvider,
+    ApiProvider,
+    LoaderServiceProvider
   ]
 })
 export class AppModule {}
