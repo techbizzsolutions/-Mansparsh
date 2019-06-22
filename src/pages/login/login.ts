@@ -3,6 +3,7 @@ import { NavController, AlertController,ToastController, Events } from 'ionic-an
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-login',
@@ -30,9 +31,10 @@ export class LoginPage {
         this.loader.Hide();
         if(res.authorization)
         {
-          this.register.value.res = res;
-          localStorage.setItem('user', JSON.stringify(this.register.value));
+         
+          localStorage.setItem('user', JSON.stringify(res));
           this.events.publish('user:loggedIn');
+            this.navCtrl.setRoot('StepOnePage');
         }
         else{
           let toast = this.toastCtrl.create({
@@ -60,5 +62,9 @@ export class LoginPage {
   {
     this.navCtrl.push('ForgotpassPage');
   }
-  
+
+  newUser()
+  {
+    this.navCtrl.push(HomePage);
+  }
 }

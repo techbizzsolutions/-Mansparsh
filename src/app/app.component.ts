@@ -21,7 +21,7 @@ export class MyApp {
       this.user = JSON.parse(localStorage.getItem('user'));
       if(this.user)
       {
-        this.rootPage = 'DashboardPage';
+        this.rootPage = LoginPage;
       }
       else{
         this.rootPage = LoginPage;

@@ -24,7 +24,10 @@ export class HomePage {
       first_name:['',Validators.required],
       password:['',Validators.required],
       confirmpassword:['',Validators.required],
-      email:[''],
+      emial: ["",Validators.compose([
+        Validators.required,
+        Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+      ])],
       last_name:['',Validators.required],
       mobile : ['',Validators.compose([Validators.required, Validators.pattern('^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$'), Validators.maxLength(15)])]
     });
@@ -36,9 +39,11 @@ export class HomePage {
     {
       if(this.register.value.password == this.register.value.confirmpassword)
       {
-        this.register.value.date_of_birth = this.dob;
+        let dateformat = this.dob.split('-');
+        this.register.value.date_of_birth = dateformat[2]+'/'+dateformat[1]+'/'+dateformat[0];
         this.register.value.gender = this.gender;
         this.register.value.on_behalf = this.Behalf;
+        delete this.register.value['confirmpassword'];
         console.log(this.register.value);
         localStorage.setItem('user', JSON.stringify(this.register.value));
         var otp = Math.floor(1000 + Math.random() * 9000);

@@ -22,7 +22,7 @@ export class OtpPage {
 
   ionViewDidLoad() {
     this.user = JSON.parse(localStorage.getItem('user')) ;
-    console.log('ionViewDidLoad OtpPage',this.user.Mobile);
+    console.log('ionViewDidLoad OtpPage',this.user.mobile);
   }
 
   resendOtp()
@@ -66,7 +66,7 @@ export class OtpPage {
             }
             break;
             default :
-            this.navCtrl.setRoot('DashboardPage');
+            this.navCtrl.setRoot('StepOnePage');
           }
         }
       },
@@ -96,7 +96,8 @@ export class OtpPage {
           console.log('this.res',res);
           if(res.authorization)
           {
-           
+            localStorage.setItem('user', JSON.stringify(res));
+            this.navCtrl.setRoot('StepOnePage');
           }
           else{
             let toast = this.toastCtrl.create({

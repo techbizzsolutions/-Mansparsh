@@ -11,8 +11,8 @@
     <ion-item>
         <ion-input type="number" [(ngModel)]="otp" placeholder="Enter OTP"></ion-input>
     </ion-item>
-    <p class="button_div" *ngIf="user">Edit number ? <span style="color: #f27613;" (click)="editnumber()">{{user.Mobile}}</span></p>
-    <p class="button_div" *ngIf="user">Resend OTP ? <span style="color: #f27613;" (click)="resendOtp()">{{user.Mobile}}</span></p>
+    <p class="button_div" *ngIf="user">Edit number ? <span style="color: #f27613;" (click)="editnumber()">{{user.mobile}}</span></p>
+    <p class="button_div" *ngIf="user">Resend OTP ? <span style="color: #f27613;" (click)="resendOtp()">{{user.mobile}}</span></p>
     <!-- Float the icon right -->
     <div class="button_div">
         <button ion-button (click)="verifyOtp()" block icon-right>
