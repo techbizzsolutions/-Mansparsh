@@ -13,6 +13,8 @@ import { LoaderServiceProvider } from '../../providers/loader-service/loader-ser
 export class HomePage {
   private register : FormGroup;
   gender:any = "1";
+  Maritiallist = [];
+  Maritial:any;
   dob:any;
   Behalf:any;
   behalfs = [];
@@ -24,7 +26,7 @@ export class HomePage {
       first_name:['',Validators.required],
       password:['',Validators.required],
       confirmpassword:['',Validators.required],
-      emial: ["",Validators.compose([
+      email: ["",Validators.compose([
         Validators.required,
         Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
       ])],
@@ -43,6 +45,7 @@ export class HomePage {
         this.register.value.date_of_birth = dateformat[2]+'/'+dateformat[1]+'/'+dateformat[0];
         this.register.value.gender = this.gender;
         this.register.value.on_behalf = this.Behalf;
+        this.register.value.marital_status = this.Maritial;
         delete this.register.value['confirmpassword'];
         console.log(this.register.value);
         localStorage.setItem('user', JSON.stringify(this.register.value));
@@ -90,6 +93,7 @@ export class HomePage {
         if(res.authorization)
         {
           this.behalfs =res.on_behalf;
+          this.getMaritial();
         }
         else{
           let toast = this.toastCtrl.create({
@@ -112,7 +116,37 @@ export class HomePage {
       });
   }
 
-  
+  getMaritial()
+{
+  this.loader.Show("Loading...");
+  this.api.get('get_maritial_status').subscribe(res => {
+    this.loader.Hide();
+    console.log('this.res',res);
+    if(res.authorization)
+    {
+      this.Maritiallist =res.marital_status;
+     
+    }
+    else{
+      let toast = this.toastCtrl.create({
+        message: res.message, 
+        position: 'top',
+        duration: 3000
+      });
+      toast.present();
+    }
+    
+  }, err => {
+    this.loader.Hide();
+    console.log('login err',err);
+    let toast = this.toastCtrl.create({
+      message: 'Something went wrong, please try again', 
+      position: 'top',
+      duration: 3000
+    });
+    toast.present();
+  });
+}
   showAlert(message,bol)
   {
     let alert = this.alertCtrl.create({

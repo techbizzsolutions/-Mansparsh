@@ -10,19 +10,19 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'step-one.html',
 })
 export class StepOnePage {
-  Maritiallist = [];
   Religionlist = [];
   Castelist = [];
   subCastelist = [];
   Countrylist = [];
   satelist = [];
   Citylist = [];
+  Langlist = [];
+  Lang:any;
   City:any;
   state:any;
   Caste:any;
   Country:any;
   subCaste:any;
-  Maritial:any;
   Religion:any;
   private register : FormGroup;
   constructor(public navCtrl: NavController,
@@ -30,22 +30,55 @@ export class StepOnePage {
     public formBuilder: FormBuilder,
     public api: ApiProvider, public toastCtrl: ToastController, public navParams: NavParams) {
       this.register = this.formBuilder.group({
-        language: ['', Validators.required],
-        education: ['', Validators.required],
+        highest_education: ['', Validators.required],
         occupation: ['', Validators.required],
-        salary: ['', Validators.required],
+        annual_income: ['', Validators.required],
         address: ['', Validators.required],
-        mobile : ['',Validators.compose([Validators.required, Validators.pattern('^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$'), Validators.maxLength(15)])]
+        whatsapp_number : ['',Validators.compose([Validators.required, Validators.pattern('^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$'), Validators.maxLength(15)])]
       });
   }
 
   ionViewDidLoad() {
-    this.getMaritial();
+    this.getReligion();
 }
 
 logForm()
 {
-  this.navCtrl.push('StepTwoPage');
+  this.register.value.religion = this.Religion;
+  this.register.value.caste = this.Caste;
+  this.register.value.sub_caste = this.subCaste;
+  this.register.value.country = this.Country;
+  this.register.value.city = this.City;
+  this.register.value.state = this.state;
+  this.register.value.mother_tongue = this.Lang;
+  this.loader.Show("Loading...");
+  this.api.auth('profile_info_1',this.register.value).subscribe(res => {
+    this.loader.Hide();
+    console.log('this.res',res);
+    if(res.authorization)
+    {
+      this.navCtrl.push('StepTwoPage');
+    }
+    else{
+      let toast = this.toastCtrl.create({
+        message: res.message, 
+        position: 'top',
+        duration: 3000
+      });
+      toast.present();
+    }
+    
+  }, err => {
+    this.loader.Hide();
+    console.log('login err',err);
+    let toast = this.toastCtrl.create({
+      message: 'Something went wrong, please try again', 
+      position: 'top',
+      duration: 3000
+    });
+    toast.present();
+  });
+  
 }
 
 selectReligion()
@@ -61,16 +94,15 @@ selectCaste()
   this.getsubCaste();
 }
 
-getMaritial()
+getLang()
 {
   this.loader.Show("Loading...");
-  this.api.get('get_maritial_status').subscribe(res => {
+  this.api.get('get_mother_tongue').subscribe(res => {
     this.loader.Hide();
     console.log('this.res',res);
     if(res.authorization)
     {
-      this.Maritiallist =res.marital_status;
-      this.getReligion();
+      this.Langlist =res.mother_tongue;
     }
     else{
       let toast = this.toastCtrl.create({
@@ -102,6 +134,7 @@ getReligion()
     if(res.authorization)
     {
       this.Religionlist =res.profile_religion;
+      this.getLang();
     }
     else{
       let toast = this.toastCtrl.create({

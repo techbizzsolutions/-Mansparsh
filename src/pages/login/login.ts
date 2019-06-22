@@ -34,7 +34,7 @@ export class LoginPage {
          
           localStorage.setItem('user', JSON.stringify(res));
           this.events.publish('user:loggedIn');
-            this.navCtrl.setRoot('StepOnePage');
+            this.navCtrl.setRoot('DashboardPage');
         }
         else{
           let toast = this.toastCtrl.create({

@@ -1,5 +1,5 @@
 import { Component,ViewChild } from '@angular/core';
-import { Nav,AlertController, Platform } from 'ionic-angular';
+import { Nav,AlertController, Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
@@ -10,18 +10,70 @@ import { LoginPage } from '../pages/login/login';
 export class MyApp {
   rootPage:any;
   user:any;
+  pages:any = [];
   @ViewChild(Nav) nav: Nav;
-  constructor(platform: Platform, statusBar: StatusBar,public alertCtrl: AlertController, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar,
+    public menuCtrl: MenuController,public alertCtrl: AlertController, splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       statusBar.backgroundColorByHexString("#FF6347");
       splashScreen.hide();
-      this.user = JSON.parse(localStorage.getItem('user'));
-      if(this.user)
+      // used for an example of ngFor and navigation
+      this.pages = [{
+        title: 'Home',
+        component: 'AdminHomePage',
+        icon: 'ios-home'
+      },
       {
-        this.rootPage = LoginPage;
+        title: 'Matching Profiles',
+        component: 'CreateCompititionPage',
+        icon: 'ios-create'
+      },
+      {
+        title: 'Who View My Profile?',
+        component: 'CompititionListPage',
+        icon: 'md-list-box'
+      },
+      {
+        title: 'Package',
+        component: 'SportsWithSheetPage',
+        icon: 'md-list-box'
+      },
+      {
+        title: 'Edit Profile',
+        component: 'CreateInformationPage',
+        icon: 'md-information-circle'
+      },
+      {
+        title: 'Gallery Photo',
+        component: 'GenerateQRcodePage',
+        icon: 'md-qr-scanner'
+      },
+      {
+        title: 'Privacy Options',
+        component: 'ImportCandidateListPage',
+        icon: 'md-cloud-upload'
+      },
+      {
+        title: 'Help and Customer Support',
+        component: 'StudentInformationPage',
+        icon: 'md-person'
+      },
+      {
+        title: 'Happy Stories',
+        component: 'StartCompetitionPage',
+        icon: 'md-time'
+      },
+      {
+        title: 'Log Out',
+        icon: 'md-log-out'
+      }];
+      this.user = JSON.parse(localStorage.getItem('user'));
+      if(this.user && this.user.member_id)
+      {
+        this.rootPage = 'DashboardPage';
       }
       else{
         this.rootPage = LoginPage;
@@ -55,5 +107,26 @@ export class MyApp {
       });
     });
   }
+  openPage(page) {
+    console.log("*****",page);
+    // Reset the content nav to have just this page
+    // we wouldn't want the back button to show in this scenario
+      switch(page.title)
+      {
+        case 'Home':
+        this.nav.setRoot(page.component);
+        break;
+        case 'Log Out':
+        localStorage.clear();
+        this.menuCtrl.swipeEnable(false, 'menu1');
+        this.nav.setRoot(LoginPage);
+        break;
+        default:
+        {
+          this.nav.push(page.component);
+        }
+      }
+  }
+
 }
 

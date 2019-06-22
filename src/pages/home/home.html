@@ -68,6 +68,12 @@
                     <ion-option *ngFor="let item of behalfs" [value]="item.on_behalf_id">{{item.name}}</ion-option>
                 </ion-select>
             </ion-item>
+            <ion-item>
+                    <ion-label>Select Maritial Status</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
+                        <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}</ion-option>
+                    </ion-select>
+                </ion-item>
         <ion-item>
                 <ion-label floating>Password</ion-label>
                 <ion-input type="password" formControlName="password"></ion-input>

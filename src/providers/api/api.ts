@@ -30,7 +30,7 @@ export class ApiProvider {
     }
 
     let rowdata = data;
-    rowdata.user_id = this.user.res.user_id;
+    rowdata.member_id = this.user.member_id;
     console.log(url, rowdata);
     if (this.isOnline()) {
       return this.http.post<any>(this.host + url, JSON.stringify(rowdata)).timeout(1000*60);
