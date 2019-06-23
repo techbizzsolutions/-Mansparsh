@@ -23,48 +23,48 @@ export class MyApp {
       // used for an example of ngFor and navigation
       this.pages = [{
         title: 'Home',
-        component: 'AdminHomePage',
+        component: 'DashboardPage',
         icon: 'ios-home'
       },
       {
         title: 'Matching Profiles',
-        component: 'CreateCompititionPage',
-        icon: 'ios-create'
+        component: 'DashboardPage',
+        icon: 'ios-people'
       },
       {
         title: 'Who View My Profile?',
-        component: 'CompititionListPage',
-        icon: 'md-list-box'
+        component: 'DashboardPage',
+        icon: 'ios-people'
       },
       {
         title: 'Package',
-        component: 'SportsWithSheetPage',
+        component: 'DashboardPage',
         icon: 'md-list-box'
       },
       {
         title: 'Edit Profile',
-        component: 'CreateInformationPage',
-        icon: 'md-information-circle'
+        component: 'StepOnePage',
+        icon: 'ios-create'
       },
       {
         title: 'Gallery Photo',
-        component: 'GenerateQRcodePage',
-        icon: 'md-qr-scanner'
-      },
-      {
-        title: 'Privacy Options',
-        component: 'ImportCandidateListPage',
-        icon: 'md-cloud-upload'
-      },
-      {
-        title: 'Help and Customer Support',
-        component: 'StudentInformationPage',
-        icon: 'md-person'
+        component: 'DashboardPage',
+        icon: 'ios-images'
       },
       {
         title: 'Happy Stories',
-        component: 'StartCompetitionPage',
-        icon: 'md-time'
+        component: 'DashboardPage',
+        icon: 'ios-happy'
+      },
+      {
+        title: 'Privacy Options',
+        component: 'DashboardPage',
+        icon: 'ios-lock'
+      },
+      {
+        title: 'Help and Customer Support',
+        component: 'DashboardPage',
+        icon: 'md-help-circle'
       },
       {
         title: 'Log Out',
