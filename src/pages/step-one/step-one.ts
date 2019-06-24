@@ -44,13 +44,16 @@ export class StepOnePage {
 
 logForm()
 {
-  this.register.value.religion = this.Religion;
-  this.register.value.caste = this.Caste;
-  this.register.value.sub_caste = this.subCaste;
-  this.register.value.country = this.Country;
-  this.register.value.city = this.City;
-  this.register.value.state = this.state;
-  this.register.value.mother_tongue = this.Lang;
+  
+  if(this.Religion && this.Caste && this.subCaste && this.Country && this.City && this.state && this.Lang)
+  {
+    this.register.value.religion = this.Religion;
+    this.register.value.caste = this.Caste;
+    this.register.value.sub_caste = this.subCaste;
+    this.register.value.country = this.Country;
+    this.register.value.city = this.City;
+    this.register.value.state = this.state;
+    this.register.value.mother_tongue = this.Lang;
   this.loader.Show("Loading...");
   this.api.auth('profile_info_1',this.register.value).subscribe(res => {
     this.loader.Hide();
@@ -78,6 +81,15 @@ logForm()
     });
     toast.present();
   });
+}
+else{
+  let toast = this.toastCtrl.create({
+    message: 'Require all fileds', 
+    position: 'top',
+    duration: 3000
+  });
+  toast.present();
+}
   
 }
 

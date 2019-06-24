@@ -38,7 +38,7 @@ export class MyApp {
       },
       {
         title: 'Package',
-        component: 'DashboardPage',
+        component: 'PlanPage',
         icon: 'md-list-box'
       },
       {
@@ -76,7 +76,7 @@ export class MyApp {
         this.rootPage = 'DashboardPage';
       }
       else{
-        this.rootPage = LoginPage;
+        this.rootPage = 'DashboardPage';
       }
       platform.registerBackButtonAction(() => {
         if (this.nav.canGoBack()) {

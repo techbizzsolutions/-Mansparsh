@@ -1,5 +1,4 @@
 <ion-header>
-
     <ion-navbar color="header">
         <ion-buttons left>
             <button ion-button menuToggle>
@@ -8,14 +7,16 @@
         </ion-buttons>
         <ion-title> Mansparsh</ion-title>
         <ion-buttons end>
-            <button ion-button icon-only (click)="reload()">
+            <button ion-button icon-only>
                 <ion-icon name="ios-funnel"></ion-icon>
              </button>
         </ion-buttons>
     </ion-navbar>
-
 </ion-header>
 <ion-content >
+        <img *ngIf="bannerData" style="width: 100%;
+        height: 200px !important;" [src]="bannerData.image">
+        <p *ngIf="!(user && user.member_id)" class="titleontop">Please <span (click)="open('1')">Login</span> or <span (click)="open('2')">Register</span> to Contact them directly</p>
      <ion-list>
         <ion-card *ngFor="let item of memberList;">
        <ion-item >

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @IonicPage()
 @Component({
@@ -10,274 +10,121 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: 'step-two.html',
 })
 export class StepTwoPage {
-
-  Maritiallist = [];
-  Religionlist = [];
-  Castelist = [];
-  subCastelist = [];
-  Countrylist = [];
-  satelist = [];
-  Citylist = [];
-  City:any;
-  state:any;
-  Caste:any;
-  Country:any;
-  subCaste:any;
-  Maritial:any;
-  Religion:any;
-  private register : FormGroup;
+  Heightlist = ["Below 4ft 6in", "4ft 7in", "4ft 8in", "4ft 9in", "4ft 10in", "4ft 11in", "5ft", "5ft 1in", "5ft 2in", "5ft 3in", "5ft 4in", "5ft 5in", "5ft 6in", "5ft 7in", "5ft 8in", "5ft 9in", "5ft 10in", "5ft 11in", "6ft", "6ft 1in", "6ft 2in", "6ft 3in", "6ft 4in", "6ft 5in", "6ft 6in", "6ft 7in", "6ft 8in", "6ft 9in", "6ft 10in", "6ft 11in", "7ft"];
+  Weightlist = [];
+  Complextionlist = ["Very Fair", "Fair", "Wheatish", "Wheatish Medium", "Wheatish Brown", "Dark"];
+  BodyTypelist = ["Slim", "Average", "Athletic", "Heavy"];
+  Disabilitylist = [{
+    id: 0,
+    name: "None"
+  },
+  {
+    id: 1,
+    name: "Physical Disability"
+  }];
+  Dietlist = ["Veg", "Eggeterian", "Occasionally Non-veg", "Non-Veg"];
+  Smokelist = [{
+    id: 0,
+    name: "No"
+  },
+  {
+    id: 1,
+    name: "Yes"
+  },
+  {
+    id: 2,
+    name: "Occasionally"
+  }];
+  Intercastelist = [{
+    id: 0,
+    name: "No"
+  },
+  {
+    id: 1,
+    name: "Yes"
+  }];
+  Intercaste:any;
+  mangalik:any;
+  Raashilist = ["Aries or Maish", "Taurus or Vrish", "Gemini or Mithun", "Cancer or Kark", "Leo or Singh", "Virgo or Kanya", "Libra or Tula", "Scorpio or Vrishchik", "Sagittarius or Dhanu", "Capricorn or Makar", "Aquarius or Kumbh", "Pisces or Meen"];
+  Complextion: any;
+  BodyType: any;
+  Raashi: any;
+  Diet: any;
+  Smoke: any;
+  Drink: any;
+  Height: any;
+  Weight: any;
+  Disability: any;
+  private register: FormGroup;
   constructor(public navCtrl: NavController,
     private loader: LoaderServiceProvider,
     public formBuilder: FormBuilder,
     public api: ApiProvider, public toastCtrl: ToastController, public navParams: NavParams) {
-      this.register = this.formBuilder.group({
-        language: ['', Validators.required],
-        education: ['', Validators.required],
-        occupation: ['', Validators.required],
-        salary: ['', Validators.required],
-        address: ['', Validators.required],
-        mobile : ['',Validators.compose([Validators.required, Validators.pattern('^([0|\+[0-9]{1,5})?([7-9][0-9]{9})$'), Validators.maxLength(15)])]
-      });
+    this.register = this.formBuilder.group({
+      eye_color: ['', Validators.required],
+      hair_color: ['', Validators.required],
+      about_member: ['', Validators.required]
+    });
+    for (let index = 40; index < 151; index++) {
+      this.Weightlist.push(index + " kg");
+
+    }
   }
 
   ionViewDidLoad() {
-    //this.getMaritial();
-}
 
-logForm()
-{
-  this.navCtrl.push('StepTwoPage');
-}
+  }
 
-getMaritial()
-{
-  this.loader.Show("Loading...");
-  this.api.get('get_maritial_status').subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
+  logForm() {
+    if(this.Height && this.Weight && this.Complextion && this.BodyType && this.Disability && this.Drink && this.Smoke && this.Diet && this.Raashi && this.mangalik && this.Intercaste)
     {
-      this.Maritiallist =res.marital_status;
-      this.getReligion();
-    }
-    else{
+      this.register.value.height = this.Height;
+    this.register.value.weight = this.Weight;
+    this.register.value.complexion = this.Complextion;
+    this.register.value.body_type = this.BodyType;
+    this.register.value.any_disability = this.Disability;
+    this.register.value.drink = this.Drink;
+    this.register.value.smoke = this.Smoke;
+    this.register.value.diet = this.Diet;
+    this.register.value.raashi = this.Raashi;
+    this.register.value.u_manglik = this.mangalik;
+    this.register.value.prefered_status = this.Intercaste;
+    this.loader.Show("Loading...");
+    this.api.auth('profile_info_2', this.register.value).subscribe(res => {
+      this.loader.Hide();
+      console.log('this.res', res);
+      if (res.authorization) {
+        this.navCtrl.push('PlanPage');
+      }
+      else {
+        let toast = this.toastCtrl.create({
+          message: res.message,
+          position: 'top',
+          duration: 3000
+        });
+        toast.present();
+      }
+
+    }, err => {
+      this.loader.Hide();
+      console.log('login err', err);
       let toast = this.toastCtrl.create({
-        message: res.message, 
+        message: 'Something went wrong, please try again',
         position: 'top',
         duration: 3000
       });
       toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
+    });
+  }
+  else
+  {
     let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
+      message: 'Require all fileds',
       position: 'top',
       duration: 3000
     });
     toast.present();
-  });
-}
-
-getReligion()
-{
-  this.loader.Show("Loading...");
-  this.api.get('get_religion').subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
-    {
-      this.Religionlist =res.profile_religion;
-      this.getCaste();
-    }
-    else{
-      let toast = this.toastCtrl.create({
-        message: res.message, 
-        position: 'top',
-        duration: 3000
-      });
-      toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
-    let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  });
-}
-
-getCaste()
-{
-  this.loader.Show("Loading...");
-  this.api.add('get_caste',{
-    "religion_id":this.Religion
-  }).subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
-    {
-      this.Castelist =res.profile_caste;
-      this.getsubCaste();
-    }
-    else{
-      let toast = this.toastCtrl.create({
-        message: res.message, 
-        position: 'top',
-        duration: 3000
-      });
-      toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
-    let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  });
-}
-
-getsubCaste()
-{
-  this.loader.Show("Loading...");
-  this.api.add('get_sub_caste',{
-    "caste_id":this.Caste
-  }).subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
-    {
-      this.subCastelist =res.profile_sub_caste;
-      this.getCountry();
-    }
-    else{
-      let toast = this.toastCtrl.create({
-        message: res.message, 
-        position: 'top',
-        duration: 3000
-      });
-      toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
-    let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  });
-}
-
-getCountry()
-{
-  this.loader.Show("Loading...");
-  this.api.get('get_country').subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
-    {
-      this.Countrylist =res.profile_country;
-      this.getState();
-    }
-    else{
-      let toast = this.toastCtrl.create({
-        message: res.message, 
-        position: 'top',
-        duration: 3000
-      });
-      toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
-    let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  });
-}
-
-getState()
-{
-  this.loader.Show("Loading...");
-  this.api.add('get_state',{
-    "country_id":this.Country
-  }).subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
-    {
-      this.satelist =res.profile_state;
-      this.getCity();
-    }
-    else{
-      let toast = this.toastCtrl.create({
-        message: res.message, 
-        position: 'top',
-        duration: 3000
-      });
-      toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
-    let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  });
-}
-
-getCity()
-{
-  this.loader.Show("Loading...");
-  this.api.add('get_city',{
-    "state_id":this.state
-  }).subscribe(res => {
-    this.loader.Hide();
-    console.log('this.res',res);
-    if(res.authorization)
-    {
-      this.Citylist =res.profile_city;
-    }
-    else{
-      let toast = this.toastCtrl.create({
-        message: res.message, 
-        position: 'top',
-        duration: 3000
-      });
-      toast.present();
-    }
-    
-  }, err => {
-    this.loader.Hide();
-    console.log('login err',err);
-    let toast = this.toastCtrl.create({
-      message: 'Something went wrong, please try again', 
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  });
-}
+  }
+  }
 
 }

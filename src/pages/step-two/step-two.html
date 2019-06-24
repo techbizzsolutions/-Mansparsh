@@ -14,56 +14,55 @@
             <ion-col col-6>
                 <ion-item>
                     <ion-label>Height</ion-label>
-                    <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                        <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+                    <ion-select interface="popover" [(ngModel)]="Height" [ngModelOptions]="{standalone: true}">
+                        <ion-option *ngFor="let item of Heightlist" [value]="item">{{item}}
                         </ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
             <ion-col col-6>
                 <ion-item>
-                    <ion-input type="number" placeholder="Enter weight" formControlName="mobile"></ion-input>
+                    <ion-label>Weight</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="Weight" [ngModelOptions]="{standalone: true}">
+                        <ion-option *ngFor="let item of Weightlist" [value]="item">{{item}}
+                        </ion-option>
+                    </ion-select>
                 </ion-item>
-                <div padding-horizontal>
-                    <div class="alert"
-                        *ngIf="!register.controls['mobile'].valid && register.controls['mobile'].touched">Please Enter a
-                        mobile number</div>
-                </div>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col col-6>
                 <ion-item>
-                    <ion-input type="text" placeholder="Eye Color" formControlName="language"></ion-input>
+                    <ion-input type="text" placeholder="Eye Color" formControlName="eye_color"></ion-input>
                 </ion-item>
                 <div padding-horizontal>
                     <div class="alert"
-                        *ngIf="!register.controls['language'].valid && register.controls['language'].touched">Please
-                        Enter Mother Tangue Language</div>
+                        *ngIf="!register.controls['eye_color'].valid && register.controls['eye_color'].touched">Please
+                        Enter Eye Color</div>
                 </div>
             </ion-col>
             <ion-col col-6>
                 <ion-item>
-                    <ion-input type="text" placeholder="Hair Color" formControlName="language"></ion-input>
+                    <ion-input type="text" placeholder="Hair Color" formControlName="hair_color"></ion-input>
                 </ion-item>
                 <div padding-horizontal>
                     <div class="alert"
-                        *ngIf="!register.controls['language'].valid && register.controls['language'].touched">Please
-                        Enter Mother Tangue Language</div>
+                        *ngIf="!register.controls['hair_color'].valid && register.controls['hair_color'].touched">Please
+                        Enter Hair Color</div>
                 </div>
             </ion-col>
         </ion-row>
         <ion-item>
             <ion-label>Complextion</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-select interface="popover" [(ngModel)]="Complextion" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of Complextionlist" [value]="item">{{item}}
                 </ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label>Body Type</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-select interface="popover" [(ngModel)]="BodyType" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of BodyTypelist" [value]="item">{{item}}
                 </ion-option>
             </ion-select>
         </ion-item>
@@ -71,8 +70,8 @@
             <ion-col col-6>
                 <ion-item>
                     <ion-label>Drink</ion-label>
-                    <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                        <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+                    <ion-select interface="popover" [(ngModel)]="Drink" [ngModelOptions]="{standalone: true}">
+                        <ion-option *ngFor="let item of Smokelist" [value]="item.id">{{item.name}}
                         </ion-option>
                     </ion-select>
                 </ion-item>
@@ -80,56 +79,56 @@
             <ion-col col-6>
                 <ion-item>
                     <ion-label>Smoke</ion-label>
-                    <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                        <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+                    <ion-select interface="popover" [(ngModel)]="Smoke" [ngModelOptions]="{standalone: true}">
+                        <ion-option *ngFor="let item of Smokelist" [value]="item.id">{{item.name}}
                         </ion-option>
                     </ion-select>
                 </ion-item>
             </ion-col>
         </ion-row>
         <ion-item>
-            <ion-label>Any Disability</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-label>Disability</ion-label>
+            <ion-select interface="popover" [(ngModel)]="Disability" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of Disabilitylist" [value]="item.id">{{item.name}}
                 </ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label>Select Raashi</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-select interface="popover" [(ngModel)]="Raashi" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of Raashilist" [value]="item">{{item}}
                 </ion-option>
             </ion-select>
         </ion-item>
 
         <ion-item>
             <ion-label>Diet</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-select interface="popover" [(ngModel)]="Diet" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of Dietlist" [value]="item">{{item}}
                 </ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label>Are you mangalik?</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-select interface="popover" [(ngModel)]="mangalik" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of Intercastelist" [value]="item.id">{{item.name}}
                 </ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label>Intercaste Marriage accepted ?</ion-label>
-            <ion-select interface="popover" [(ngModel)]="Maritial" [ngModelOptions]="{standalone: true}">
-                <ion-option *ngFor="let item of Maritiallist" [value]="item.marital_status_id">{{item.name}}
+            <ion-select interface="popover" [(ngModel)]="Intercaste" [ngModelOptions]="{standalone: true}">
+                <ion-option *ngFor="let item of Intercastelist" [value]="item.id">{{item.name}}
                 </ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked>About You</ion-label>
-            <ion-textarea rows="5" formControlName="address"></ion-textarea>
+            <ion-textarea rows="5" formControlName="about_member"></ion-textarea>
         </ion-item>
         <div padding-horizontal>
-            <div class="alert" *ngIf="!register.controls['address'].valid && register.controls['address'].touched">
-                Please Enter complete Address</div>
+            <div class="alert" *ngIf="!register.controls['about_member'].valid && register.controls['about_member'].touched">
+                Please Enter About You</div>
         </div>
         <!-- Float the icon right -->
         <div class="button_div">

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { LoaderServiceProvider } from '../../providers/loader-service/loader-service';
 import { ApiProvider } from '../../providers/api/api';
+import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -13,10 +15,54 @@ export class DashboardPage {
  user:any;
  page = 1;
  isShow:boolean = true;
+ bannerData:any;
   constructor(public navCtrl: NavController,
     private loader: LoaderServiceProvider,
     public api: ApiProvider, public toastCtrl: ToastController,
     public navParams: NavParams) {
+      this.getBanner();
+  }
+
+  open(item)
+  {
+     switch (item) {
+       case "1":
+         this.navCtrl.push(LoginPage);
+         break;
+         case "2":
+          this.navCtrl.push(HomePage);
+          break;
+       default:
+         break;
+     }
+  }
+
+  getBanner()
+  {
+    this.api.get('get_banner_images').subscribe(res => {
+      console.log('this.res',res);
+      if(res.authorization)
+      {
+        this.bannerData = res.all_banners[Math.floor(Math.random()*res.all_banners.length)];
+      }
+      else{
+        let toast = this.toastCtrl.create({
+          message: res.message, 
+          position: 'top',
+          duration: 3000
+        });
+        toast.present();
+      }
+      
+    }, err => {
+      console.log('login err',err);
+      let toast = this.toastCtrl.create({
+        message: 'Something went wrong, please try again', 
+        position: 'top',
+        duration: 3000
+      });
+      toast.present();
+    });
   }
 
   ionViewDidLoad() {

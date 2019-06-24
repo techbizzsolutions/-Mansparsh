@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>
+      Mansparsh
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h5>Choose Plan</h5>
+  <ion-list>
+    <ion-card *ngFor="let item of planList;">
+        <div class="maindiv">
+            <h5>{{item.name}}</h5>
+            <p>Amount: {{item.amount}}</p>
+            <p>Express Interest: {{item.express_interest}}</p>
+            <p>Photo Gallery: {{item.photo_gallery}}</p>
+            <p>Direct Message: {{item.direct_messages}}</p>
+            <button ion-button (click)="choosePlane()">
+                Get This
+          </button>
+        </div>
+    </ion-card>
+  </ion-list>
+</ion-content>

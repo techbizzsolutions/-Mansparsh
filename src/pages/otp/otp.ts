@@ -29,10 +29,10 @@ export class OtpPage {
   {
        var otp = Math.floor(1000 + Math.random() * 9000);
        localStorage.setItem('otp', otp+"");
-       this.smsServiceProvider.sendMessage(this.user.Mobile,"Your OTP is " + otp).then(res=>{
+       this.smsServiceProvider.sendMessage(this.user.mobile,"Your OTP is " + otp).then(res=>{
          if(res)
          {
-          this.showAlert("Otp has been sent successfully to " +this.user.Mobile, 1); 
+          this.showAlert("Otp has been sent successfully to " +this.user.mobile, 1); 
          }
          else{
           this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
@@ -91,7 +91,7 @@ export class OtpPage {
       {
         localStorage.setItem('isVerified', 'true');
         this.loader.Show("Loading...");
-        this.api.add('regsiter',this.user).subscribe(res => {
+        this.api.add('register',this.user).subscribe(res => {
           this.loader.Hide();
           console.log('this.res',res);
           if(res.authorization)

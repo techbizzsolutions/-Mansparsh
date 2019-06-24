@@ -51,10 +51,10 @@ export class HomePage {
         localStorage.setItem('user', JSON.stringify(this.register.value));
         var otp = Math.floor(1000 + Math.random() * 9000);
         localStorage.setItem('otp', otp+"");
-        this.smsServiceProvider.sendMessage(this.register.value.Mobile,"Your OTP is " + otp).then(res=>{
+        this.smsServiceProvider.sendMessage(this.register.value.mobile,"Your OTP is " + otp).then(res=>{
           if(res)
           {
-           this.showAlert("Otp has been sent successfully to " +this.register.value.Mobile, 1); 
+           this.showAlert("Otp has been sent successfully to " +this.register.value.mobile, 1); 
           }
           else{
            this.showAlert("Please enable sms permission,Goto applications->Choose Law Protectors app ->Permissions-> enable sms", 2);    
