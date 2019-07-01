@@ -17,7 +17,7 @@ planList=[];
 
   choosePlane()
   {
-     this.navCtrl.setRoot('DashboardPage');
+     this.navCtrl.setRoot('PaymentPage');
   }
 
   ionViewDidLoad() {

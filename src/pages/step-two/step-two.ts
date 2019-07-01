@@ -15,36 +15,36 @@ export class StepTwoPage {
   Complextionlist = ["Very Fair", "Fair", "Wheatish", "Wheatish Medium", "Wheatish Brown", "Dark"];
   BodyTypelist = ["Slim", "Average", "Athletic", "Heavy"];
   Disabilitylist = [{
-    id: 0,
+    id: "0",
     name: "None"
   },
   {
-    id: 1,
+    id: "1",
     name: "Physical Disability"
   }];
   Dietlist = ["Veg", "Eggeterian", "Occasionally Non-veg", "Non-Veg"];
   Smokelist = [{
-    id: 0,
+    id: "0",
     name: "No"
   },
   {
-    id: 1,
+    id: "1",
     name: "Yes"
   },
   {
-    id: 2,
+    id: "2",
     name: "Occasionally"
   }];
   Intercastelist = [{
-    id: 0,
+    id: "0",
     name: "No"
   },
   {
-    id: 1,
+    id: "1",
     name: "Yes"
   }];
-  Intercaste:any;
-  mangalik:any;
+  Intercaste: any;
+  mangalik: any;
   Raashilist = ["Aries or Maish", "Taurus or Vrish", "Gemini or Mithun", "Cancer or Kark", "Leo or Singh", "Virgo or Kanya", "Libra or Tula", "Scorpio or Vrishchik", "Sagittarius or Dhanu", "Capricorn or Makar", "Aquarius or Kumbh", "Pisces or Meen"];
   Complextion: any;
   BodyType: any;
@@ -76,55 +76,64 @@ export class StepTwoPage {
   }
 
   logForm() {
-    if(this.Height && this.Weight && this.Complextion && this.BodyType && this.Disability && this.Drink && this.Smoke && this.Diet && this.Raashi && this.mangalik && this.Intercaste)
-    {
+    console.log("this.Height",this.Height);
+    console.log("this.Weight",this.Weight);
+    console.log("this.Complextion",this.Complextion);
+    console.log("this.BodyType",this.BodyType);
+    console.log("this.Disability",this.Disability);
+    console.log("this.Drink",this.Drink);
+    console.log("this.Smoke",this.Smoke);
+    console.log("this.Diet",this.Diet);
+    console.log("this.Raashi",this.Raashi);
+    console.log("this.mangalik",this.mangalik);
+    console.log("this.Intercaste",this.Intercaste);
+    if (this.Height && this.Weight && this.Complextion && this.BodyType && this.Disability && this.Drink && this.Smoke && this.Diet && this.Raashi && this.mangalik && this.Intercaste) {
       this.register.value.height = this.Height;
-    this.register.value.weight = this.Weight;
-    this.register.value.complexion = this.Complextion;
-    this.register.value.body_type = this.BodyType;
-    this.register.value.any_disability = this.Disability;
-    this.register.value.drink = this.Drink;
-    this.register.value.smoke = this.Smoke;
-    this.register.value.diet = this.Diet;
-    this.register.value.raashi = this.Raashi;
-    this.register.value.u_manglik = this.mangalik;
-    this.register.value.prefered_status = this.Intercaste;
-    this.loader.Show("Loading...");
-    this.api.auth('profile_info_2', this.register.value).subscribe(res => {
-      this.loader.Hide();
-      console.log('this.res', res);
-      if (res.authorization) {
-        this.navCtrl.push('PlanPage');
-      }
-      else {
+      this.register.value.weight = this.Weight;
+      this.register.value.complexion = this.Complextion;
+      this.register.value.body_type = this.BodyType;
+      this.register.value.any_disability = this.Disability;
+      this.register.value.drink = this.Drink;
+      this.register.value.smoke = this.Smoke;
+      this.register.value.diet = this.Diet;
+      this.register.value.raashi = this.Raashi;
+      this.register.value.u_manglik = this.mangalik;
+      this.register.value.prefered_status = this.Intercaste;
+      this.loader.Show("Loading...");
+      this.api.auth('profile_info_2', this.register.value).subscribe(res => {
+        this.loader.Hide();
+        console.log('this.res', res);
+        if (res.authorization) {
+          this.navCtrl.push('PlanPage');
+        }
+        else {
+          let toast = this.toastCtrl.create({
+            message: res.message,
+            position: 'top',
+            duration: 3000
+          });
+          toast.present();
+        }
+
+      }, err => {
+        this.loader.Hide();
+        console.log('login err', err);
         let toast = this.toastCtrl.create({
-          message: res.message,
+          message: 'Something went wrong, please try again',
           position: 'top',
           duration: 3000
         });
         toast.present();
-      }
-
-    }, err => {
-      this.loader.Hide();
-      console.log('login err', err);
+      });
+    }
+    else {
       let toast = this.toastCtrl.create({
-        message: 'Something went wrong, please try again',
+        message: 'Require all fileds',
         position: 'top',
         duration: 3000
       });
       toast.present();
-    });
-  }
-  else
-  {
-    let toast = this.toastCtrl.create({
-      message: 'Require all fileds',
-      position: 'top',
-      duration: 3000
-    });
-    toast.present();
-  }
+    }
   }
 
 }

@@ -8,21 +8,21 @@
 
 
 <ion-content padding>
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Select Religion</ion-label>
         <ion-select interface="popover" [(ngModel)]="Religion" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of Religionlist" (ionSelect)="selectReligion()" [value]="item.religion_id">
                 {{item.name}}</ion-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Select Caste</ion-label>
         <ion-select interface="popover" [(ngModel)]="Caste" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of Castelist" (ionSelect)="selectCaste()" [value]="item.caste_id">
                 {{item.caste_name}}</ion-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Select Sub Caste</ion-label>
         <ion-select interface="popover" [(ngModel)]="subCaste" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of subCastelist" [value]="item.sub_caste_id">{{item.sub_caste_name}}
@@ -30,73 +30,68 @@
         </ion-select>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Select Country</ion-label>
         <ion-select interface="popover" [(ngModel)]="Country" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of Countrylist" (ionSelect)="selectCountry()" [value]="item.country_id">
                 {{item.name}}</ion-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Select State</ion-label>
         <ion-select interface="popover" [(ngModel)]="state" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of satelist" (ionSelect)="selectSate()" [value]="item.state_id">{{item.name}}
             </ion-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Select City</ion-label>
         <ion-select interface="popover" [(ngModel)]="City" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of Citylist" [value]="item.city_id">{{item.name}}</ion-option>
         </ion-select>
     </ion-item>
-    <ion-item>
+    <ion-item class="check_div">
         <ion-label>Mother Toungue Language</ion-label>
         <ion-select interface="popover" [(ngModel)]="Lang" [ngModelOptions]="{standalone: true}">
             <ion-option *ngFor="let item of Langlist" [value]="item.language_id">{{item.name}}</ion-option>
         </ion-select>
     </ion-item>
     <form [formGroup]="register" (ngSubmit)="logForm()">
-        <ion-item>
-            <ion-label floating>Enter Whatsapp Mobile Number</ion-label>
-            <ion-input type="number" formControlName="whatsapp_number"></ion-input>
-        </ion-item>
+        <div class="check_div">
+            <ion-input type="number" placeholder="Enter Whatsapp Mobile Number" formControlName="whatsapp_number"></ion-input>
+        </div>
         <div padding-horizontal>
             <div class="alert"
                 *ngIf="!register.controls['whatsapp_number'].valid && register.controls['whatsapp_number'].touched">
                 Please Enter a mobile number</div>
         </div>
-        <ion-item>
-            <ion-label floating>Enter Highest Education</ion-label>
-            <ion-input type="text" formControlName="highest_education"></ion-input>
-        </ion-item>
+        <div class="check_div">
+            <ion-input type="text" placeholder="Enter Highest Education" formControlName="highest_education"></ion-input>
+        </div>
         <div padding-horizontal>
             <div class="alert"
                 *ngIf="!register.controls['highest_education'].valid && register.controls['highest_education'].touched">
                 Please Enter Enter Highest Education</div>
         </div>
-        <ion-item>
-            <ion-label floating>Enter Occupation</ion-label>
-            <ion-input type="text" formControlName="occupation"></ion-input>
-        </ion-item>
+        <div class="check_div">
+            <ion-input type="text" placeholder="Enter Occupation" formControlName="occupation"></ion-input>
+        </div>
         <div padding-horizontal>
             <div class="alert"
                 *ngIf="!register.controls['occupation'].valid && register.controls['occupation'].touched">Please Enter
                 Occupation</div>
         </div>
-        <ion-item>
-            <ion-label floating>Enter Annual Salary</ion-label>
-            <ion-input type="text" formControlName="annual_income"></ion-input>
-        </ion-item>
+        <div class="check_div">
+            <ion-input type="text" placeholder="Enter Annual Salary" formControlName="annual_income"></ion-input>
+        </div>
         <div padding-horizontal>
             <div class="alert"
                 *ngIf="!register.controls['annual_income'].valid && register.controls['annual_income'].touched">Please
                 Enter Annual Salary</div>
         </div>
-        <ion-item>
-            <ion-label stacked>Enter complete Address</ion-label>
-            <ion-textarea rows="5" formControlName="address"></ion-textarea>
-        </ion-item>
+        <div class="check_div">
+            <ion-textarea rows="5"  placeholder="Enter complete Address" formControlName="address"></ion-textarea>
+        </div>
         <div padding-horizontal>
             <div class="alert" *ngIf="!register.controls['address'].valid && register.controls['address'].touched">
                 Please Enter complete Address</div>

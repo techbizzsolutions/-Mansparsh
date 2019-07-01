@@ -54,8 +54,8 @@ logForm()
     this.register.value.city = this.City;
     this.register.value.state = this.state;
     this.register.value.mother_tongue = this.Lang;
-  this.loader.Show("Loading...");
-  this.api.auth('profile_info_1',this.register.value).subscribe(res => {
+    this.loader.Show("Loading...");
+    this.api.auth('profile_info_1',this.register.value).subscribe(res => {
     this.loader.Hide();
     console.log('this.res',res);
     if(res.authorization)
