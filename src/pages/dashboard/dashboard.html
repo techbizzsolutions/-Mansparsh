@@ -22,7 +22,8 @@
        <ion-item >
             <ion-row>
                <ion-col col-5>
-                  <img [src]="item.image">
+                  <img *ngIf="item.image" [src]="item.image">
+                  <img *ngIf="!item.image" src="/assets/imgs/placeholder.png">
                </ion-col>
                <ion-col col-7>
                  <h2>{{item.name}}</h2>

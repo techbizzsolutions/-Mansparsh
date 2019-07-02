@@ -88,10 +88,10 @@ export class DashboardPage {
 
   getData(id,page) {
     this.loader.Show("Loading...");
-    this.api.add('home', JSON.stringify({
+    this.api.add('home', {
       "member_id":id, /* or pass member id, if logged  */
       "page":page, /* 1,2,3,4......per page 10 records will shown */
-    })).subscribe(res => {
+    }).subscribe(res => {
       this.loader.Hide();
       console.log('this.res',res);
       if(res.authorization)
